@@ -1,7 +1,7 @@
 package main.java.com.rpxcard;
 
 import main.java.com.rpxcard.service.PrintMenu;
-import main.java.com.rpxcard.service.RegisterClients;
+import main.java.com.rpxcard.service.ClientServices;
 
 import java.util.Locale;
 import java.util.Scanner;
@@ -18,8 +18,10 @@ public class rpxCardMain {
 
     switch (choice) {
       case 1:
-        RegisterClients registerClients = new RegisterClients();
-        registerClients.MenuRegisterClients();
+        ClientServices clientServices = new ClientServices();
+        clientServices.menuRegisterClients();
+        clientServices.registerClients();
+        //cadastro clientes
         break;
 
       case 2:
