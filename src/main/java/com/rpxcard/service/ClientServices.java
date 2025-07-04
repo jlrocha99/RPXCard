@@ -4,6 +4,9 @@ package main.java.com.rpxcard.service;
 import main.java.com.rpxcard.model.Client;
 import main.java.com.rpxcard.repository.FileRepository;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -23,7 +26,7 @@ public class ClientServices {
   //Serviço de cadastro de Clientes
   public ArrayList<Client> registerClients() {
     Integer idClient;
-    String nameClient, cpfClient, emailClient;
+    String nameClient, cpfClient, emailClient, birthDateClient;
     //data
     ArrayList<Client> clientsList = new ArrayList<>();
 
@@ -38,6 +41,8 @@ public class ClientServices {
     System.out.println("CpfCLient realizado com sucesso: " + cpfClient);
     emailClient = emailClientValidation(input);
     System.out.println("EmailCLient realizado com sucesso: " + emailClient);
+    birthDateClient = String.valueOf(birthDateClientValidation(input));
+    System.out.println("BirthDateClient realizado com sucesso: " + birthDateClient);
 
     return null;
   }
@@ -70,7 +75,7 @@ public class ClientServices {
     //Receber e validar o nome
 
     String nameClient;
-    Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z]+ [a-zA-Z]+$");
+    Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z\\p{L}'\\\\s]+ [a-zA-Z\\p{L}'\\\\s]+$");
 
     while (true) {
       try {
@@ -110,16 +115,15 @@ public class ClientServices {
   public static String emailClientValidation (Scanner input) {
     //Receber e validar email
     String emailClient;
-    Pattern EMAIL_PATTERN = Pattern.compile("^[a-zA-Z][@][a-zA-Z][.com]$"); //Organizar esse Pattern
+    Pattern EMAIL_PATTERN = Pattern.compile("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
 
     while (true) {
       try {
         System.out.print("Email: ");
         emailClient = input.next();
-        if (emailClient == null || EMAIL_PATTERN.matcher(emailClient).matches()) {
+        if (emailClient == null || !EMAIL_PATTERN.matcher(emailClient).matches()) {
           System.out.println("Email inválido, siga o padrão - xxxxx@xxx.com");
         } else {
-          System.out.println("Deu certo");
           return emailClient;
         }
       } catch (InputMismatchException ime) {
@@ -128,5 +132,32 @@ public class ClientServices {
     }
   }
 
-  //Criar a validação do birthDate
+  public static LocalDate birthDateClientValidation (Scanner input) {
+    //Receber e validar a data de nascimento
+    input.nextLine(); //buffer
+    String birthDateClient;
+    Pattern BIRTH_DATE_PATTERN = Pattern.compile("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(\\d{4})$");
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+    while (true) {
+      System.out.print("Data: ");
+      birthDateClient = input.nextLine();
+
+      //Validar o formato da data
+      if (!BIRTH_DATE_PATTERN.matcher(birthDateClient).matches()) {
+        System.out.println("Formato de data Inválido!");
+        continue;
+      }
+
+      //formata e valida a data
+      try {
+        LocalDate data = LocalDate.parse(birthDateClient, formatter);
+        return data;
+
+      } catch (DateTimeParseException dtpe) {
+        System.out.println("Data inexistente no calendário!");
+      }
+    }
+  }
 }
+
