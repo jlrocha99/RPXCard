@@ -1,8 +1,11 @@
 package main.java.com.rpxcard;
 
+import main.java.com.rpxcard.model.Client;
 import main.java.com.rpxcard.service.PrintMenu;
 import main.java.com.rpxcard.service.ClientServices;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -14,13 +17,15 @@ public class rpxCardMain {
     PrintMenu printMenu = new PrintMenu();
     int choice  = printMenu.showMainMenu();
 
+
     System.out.println("Numero digitado: " + choice);
 
     switch (choice) {
       case 1:
         ClientServices clientServices = new ClientServices();
         clientServices.menuRegisterClients();
-        clientServices.registerClients();
+        ArrayList<Client> clients = clientServices.registerClients();
+        clientServices.writeClientAnswers(clients); //guardar dados do cliente em arquivo
         //cadastro clientes
         break;
 

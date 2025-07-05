@@ -10,12 +10,14 @@ public class Client {
   private LocalDate birthDate;
 
   //Constructors
-  public Client(Integer id, String name, String cpf, String email, LocalDate birthDate) {
+  public Client() {
+  }
+  public Client(Integer id, String name, String cpf, String email, String birthDate) {
     this.id = id;
     this.name = name;
     this.cpf = cpf;
     this.email = email;
-    this.birthDate = birthDate;
+    this.birthDate = LocalDate.parse(birthDate);
   }
 
   //Getters and Setters
@@ -54,6 +56,10 @@ public class Client {
     this.birthDate = birthDate;
   }
 
-  //Methods
+  public String toString() {
+    return (
+        id + name + cpf + email + birthDate
+        );
+  }
 
 }

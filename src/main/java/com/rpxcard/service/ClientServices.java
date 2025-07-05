@@ -4,11 +4,14 @@ package main.java.com.rpxcard.service;
 import main.java.com.rpxcard.model.Client;
 import main.java.com.rpxcard.repository.FileRepository;
 
+import java.io.File;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
+import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -25,28 +28,52 @@ public class ClientServices {
 
   //Serviço de cadastro de Clientes
   public ArrayList<Client> registerClients() {
+
     Integer idClient;
     String nameClient, cpfClient, emailClient, birthDateClient;
-    //data
     ArrayList<Client> clientsList = new ArrayList<>();
 
     System.out.println();
     System.out.println("--------- REGISTRO DE CLIENTE -----------");
 
     idClient = idClientValidation(input);
-    System.out.println("IdClient realizado com sucesso: " + idClient);
     nameClient = nameClientValidation(input);
-    System.out.println("NameCLient realizado com sucesso: " + nameClient);
     cpfClient = cpfClientValidation(input);
-    System.out.println("CpfCLient realizado com sucesso: " + cpfClient);
     emailClient = emailClientValidation(input);
-    System.out.println("EmailCLient realizado com sucesso: " + emailClient);
     birthDateClient = String.valueOf(birthDateClientValidation(input));
-    System.out.println("BirthDateClient realizado com sucesso: " + birthDateClient);
 
-    return null;
+    clientsList.add(new Client(idClient, nameClient, cpfClient, emailClient, birthDateClient));
+
+    for (Client obj: clientsList) {
+      System.out.println(obj);
+    }
+    return clientsList;
+
   }
 
+
+  //Serviço de salvar em arquivo os dados do cliente
+  public void writeClientAnswers(ArrayList<Client> clientsList) {
+
+    //Arquivo criado com sucesso, falta preencher com os dados do cliente
+    String entirePath = clientsList.getFirst().getBirthDate().toString()+ "-" + clientsList.getFirst().getName().toUpperCase() + ".txt";
+    String pathNoSpace = entirePath.replaceAll("\\s+", "");
+
+    File dataClientFile = new File("C:\\Users\\redev\\OneDrive\\Documentos\\RPXCard\\src\\main\\java\\com\\rpxcard\\data\\clientRegistration\\" + pathNoSpace);
+
+    if (!dataClientFile.exists()) {
+      try {
+        boolean created = dataClientFile.createNewFile();
+        if (created) {
+          System.out.println("Arquivo criado com sucesso!");
+        }
+      } catch (Exception e) {
+          e.printStackTrace();
+        }
+    }
+  }
+
+  //Serviço de validação dos inputs do cliente
   public static Integer idClientValidation (Scanner input) {
     //Receber e validar o Id
     Integer idClient;
