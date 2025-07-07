@@ -5,7 +5,6 @@ import main.java.com.rpxcard.service.PrintMenu;
 import main.java.com.rpxcard.service.ClientServices;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -17,7 +16,6 @@ public class rpxCardMain {
     PrintMenu printMenu = new PrintMenu();
     int choice  = printMenu.showMainMenu();
 
-
     System.out.println("Numero digitado: " + choice);
 
     switch (choice) {
@@ -25,8 +23,7 @@ public class rpxCardMain {
         ClientServices clientServices = new ClientServices();
         clientServices.menuRegisterClients();
         ArrayList<Client> clients = clientServices.registerClients();
-        clientServices.writeClientAnswers(clients); //guardar dados do cliente em arquivo
-        //cadastro clientes
+        clientServices.createClientFileData(clients); //criar arquivo e guardar dados do client
         break;
 
       case 2:

@@ -4,14 +4,12 @@ package main.java.com.rpxcard.service;
 import main.java.com.rpxcard.model.Client;
 import main.java.com.rpxcard.repository.FileRepository;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.regex.Pattern;
 
@@ -44,18 +42,13 @@ public class ClientServices {
 
     clientsList.add(new Client(idClient, nameClient, cpfClient, emailClient, birthDateClient));
 
-    for (Client obj: clientsList) {
-      System.out.println(obj);
-    }
     return clientsList;
 
   }
 
+  //Criação e nomeação do arquivo com dados do usuário e salvar em arquivo os dados do cliente
+  public void createClientFileData(ArrayList<Client> clientsList) {
 
-  //Serviço de salvar em arquivo os dados do cliente
-  public void writeClientAnswers(ArrayList<Client> clientsList) {
-
-    //Arquivo criado com sucesso, falta preencher com os dados do cliente
     String entirePath = clientsList.getFirst().getBirthDate().toString()+ "-" + clientsList.getFirst().getName().toUpperCase() + ".txt";
     String pathNoSpace = entirePath.replaceAll("\\s+", "");
 
@@ -70,6 +63,22 @@ public class ClientServices {
       } catch (Exception e) {
           e.printStackTrace();
         }
+    }
+    //Inserir dados do usuário no arquivo criado
+    try (BufferedWriter bw = new BufferedWriter(new FileWriter(dataClientFile, true))) {
+      bw.write("1 - " + clientsList.getFirst().getId());
+      bw.newLine();
+      bw.write("2 - " + clientsList.getFirst().getName());
+      bw.newLine();
+      bw.write("3 - " + clientsList.getFirst().getCpf());
+      bw.newLine();
+      bw.write("4 - " + clientsList.getFirst().getEmail());
+      bw.newLine();
+      bw.write("5 - " + clientsList.getFirst().getBirthDate());
+      bw.newLine();
+      System.out.println("Cliente salvo com sucesso!");
+    } catch (IOException ioe) {
+      System.out.println("Erro ao salvar o cliente: " + ioe.getMessage());
     }
   }
 
