@@ -19,9 +19,7 @@ public class ClientServices {
   //Serviço de Menu de clients
   public void menuRegisterClients() {
     FileRepository fileRepository = new FileRepository();
-    fileRepository.readFile();
-
-    //preciso ler as perguntas do formulario.txt e armazenar as respostas em um objeto do tipo Client
+    fileRepository.readClientForm();
   }
 
   //Serviço de cadastro de Clientes
@@ -29,7 +27,7 @@ public class ClientServices {
 
     Integer idClient;
     String nameClient, cpfClient, emailClient, birthDateClient;
-    ArrayList<Client> clientsList = new ArrayList<>();
+    ArrayList<Client> clientList = new ArrayList<>();
 
     System.out.println();
     System.out.println("--------- REGISTRO DE CLIENTE -----------");
@@ -40,46 +38,10 @@ public class ClientServices {
     emailClient = emailClientValidation(input);
     birthDateClient = String.valueOf(birthDateClientValidation(input));
 
-    clientsList.add(new Client(idClient, nameClient, cpfClient, emailClient, birthDateClient));
+    clientList.add(new Client(idClient, nameClient, cpfClient, emailClient, birthDateClient));
 
-    return clientsList;
+    return clientList;
 
-  }
-
-  //Criação e nomeação do arquivo com dados do usuário e salvar em arquivo os dados do cliente
-  public void createClientFileData(ArrayList<Client> clientsList) {
-
-    String entirePath = clientsList.getFirst().getBirthDate().toString()+ "-" + clientsList.getFirst().getName().toUpperCase() + ".txt";
-    String pathNoSpace = entirePath.replaceAll("\\s+", "");
-
-    File dataClientFile = new File("C:\\Users\\redev\\OneDrive\\Documentos\\RPXCard\\src\\main\\java\\com\\rpxcard\\data\\clientRegistration\\" + pathNoSpace);
-
-    if (!dataClientFile.exists()) {
-      try {
-        boolean created = dataClientFile.createNewFile();
-        if (created) {
-          System.out.println("Arquivo criado com sucesso!");
-        }
-      } catch (Exception e) {
-          e.printStackTrace();
-        }
-    }
-    //Inserir dados do usuário no arquivo criado
-    try (BufferedWriter bw = new BufferedWriter(new FileWriter(dataClientFile, true))) {
-      bw.write("1 - " + clientsList.getFirst().getId());
-      bw.newLine();
-      bw.write("2 - " + clientsList.getFirst().getName());
-      bw.newLine();
-      bw.write("3 - " + clientsList.getFirst().getCpf());
-      bw.newLine();
-      bw.write("4 - " + clientsList.getFirst().getEmail());
-      bw.newLine();
-      bw.write("5 - " + clientsList.getFirst().getBirthDate());
-      bw.newLine();
-      System.out.println("Cliente salvo com sucesso!");
-    } catch (IOException ioe) {
-      System.out.println("Erro ao salvar o cliente: " + ioe.getMessage());
-    }
   }
 
   //Serviço de validação dos inputs do cliente
@@ -110,17 +72,17 @@ public class ClientServices {
   public static String nameClientValidation (Scanner input) {
     //Receber e validar o nome
 
-    String nameClient;
+    String clientName;
     Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z\\p{L}'\\\\s]+ [a-zA-Z\\p{L}'\\\\s]+$");
 
     while (true) {
       try {
         System.out.print("Nome: ");
-        nameClient = input.nextLine();
-        if (nameClient == null || !NAME_PATTERN.matcher(nameClient).matches()) {
+        clientName = input.nextLine();
+        if (clientName == null || !NAME_PATTERN.matcher(clientName).matches()) {
           System.out.println("Nome inválido (Digite nome e sobrenome e apenas letras!)");
         } else {
-          return nameClient;
+          return clientName;
         }
       } catch (InputMismatchException ime) {
         System.out.println(ime.getMessage());
@@ -195,5 +157,42 @@ public class ClientServices {
       }
     }
   }
+
+  //Criação e nomeação do arquivo com dados do usuário e salvar em arquivo os dados do cliente
+  public void createClientFileData(ArrayList<Client> clientsList) {
+
+    String entirePath = clientsList.getFirst().getBirthDate().toString()+ "-" + clientsList.getFirst().getName().toUpperCase() + ".txt";
+    String pathNoSpace = entirePath.replaceAll("\\s+", "");
+
+    File dataClientFile = new File("C:\\Users\\redev\\OneDrive\\Documentos\\RPXCard\\src\\main\\java\\com\\rpxcard\\data\\clientRegistration\\" + pathNoSpace);
+
+    if (!dataClientFile.exists()) {
+      try {
+        boolean created = dataClientFile.createNewFile();
+        if (created) {
+          System.out.println("Arquivo criado com sucesso!");
+        }
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+    //Inserir dados do usuário no arquivo criado
+    try (BufferedWriter bw = new BufferedWriter(new FileWriter(dataClientFile, true))) {
+      bw.write("1 - " + clientsList.getFirst().getId());
+      bw.newLine();
+      bw.write("2 - " + clientsList.getFirst().getName());
+      bw.newLine();
+      bw.write("3 - " + clientsList.getFirst().getCpf());
+      bw.newLine();
+      bw.write("4 - " + clientsList.getFirst().getEmail());
+      bw.newLine();
+      bw.write("5 - " + clientsList.getFirst().getBirthDate());
+      bw.newLine();
+      System.out.println("Cliente salvo com sucesso!");
+    } catch (IOException ioe) {
+      System.out.println("Erro ao salvar o cliente: " + ioe.getMessage());
+    }
+  }
+
 }
 

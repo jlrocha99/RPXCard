@@ -10,7 +10,7 @@ public class Card {
   private Double availableLimit;
   private String status;
   private LocalDateTime cardCreationDate;
-  private Client client;
+  private Client client;  //elo de ligação entre Client e Card
 
   public Card(Integer id, Integer cardNumber, Double totalLimit, Double availableLimit, String status, LocalDate cardCreationDate, Client client) {
     this.id = id;

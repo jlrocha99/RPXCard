@@ -1,0 +1,5 @@
+1 - Card Id
+2 - Card Numero
+3 - Card TotalLimit
+4 - Card Limite disponível
+5 - Card Status

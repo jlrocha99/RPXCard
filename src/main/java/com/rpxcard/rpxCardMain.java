@@ -1,6 +1,8 @@
 package main.java.com.rpxcard;
 
+import main.java.com.rpxcard.model.Card;
 import main.java.com.rpxcard.model.Client;
+import main.java.com.rpxcard.service.CardServices;
 import main.java.com.rpxcard.service.PrintMenu;
 import main.java.com.rpxcard.service.ClientServices;
 
@@ -14,47 +16,52 @@ public class rpxCardMain {
     Scanner input = new Scanner(System.in);
 
     PrintMenu printMenu = new PrintMenu();
-    int choice  = printMenu.showMainMenu();
+    int choice = printMenu.showMainMenu();
 
     System.out.println("Numero digitado: " + choice);
 
-    switch (choice) {
-      case 1:
-        ClientServices clientServices = new ClientServices();
-        clientServices.menuRegisterClients();
-        ArrayList<Client> clients = clientServices.registerClients();
-        clientServices.createClientFileData(clients); //criar arquivo e guardar dados do client
-        break;
+    ArrayList<Client> clients = new ArrayList<>();
+    while (choice != 8) {
+      switch (choice) {
+        case 1:
+          ClientServices clientServices = new ClientServices();
+          clientServices.menuRegisterClients();
+          clients = clientServices.registerClients();
+          clientServices.createClientFileData(clients); //criar arquivo e guardar dados do client
+          break;
 
-      case 2:
-        System.out.println("Em fase de construção");
-        break;
+        case 2:
+          CardServices cardServices = new CardServices();
+          cardServices.menuRegisterCards();
+          ArrayList<Card> cards = cardServices.registerCards(clients);
+          break;
 
-      case 3:
-        System.out.println("Em fase de construção");
-        break;
+        case 3:
+          System.out.println("Em fase de construção");
+          break;
 
-      case 4:
-        System.out.println("Em fase de construção");
-        break;
+        case 4:
+          System.out.println("Em fase de construção");
+          break;
 
-      case 5:
-        System.out.println("Em fase de construção");
-        break;
+        case 5:
+          System.out.println("Em fase de construção");
+          break;
 
-      case 6:
-        System.out.println("Em fase de construção");
-        break;
+        case 6:
+          System.out.println("Em fase de construção");
+          break;
 
-      case 7:
-        System.out.println("Em fase de construção");
-        break;
-
-      case 8:
-        System.out.println("Em fase de construção");
-        break;
+        case 7:
+          System.out.println("Em fase de construção");
+          break;
+      }
+      try {
+        Thread.sleep(2000);
+        choice = printMenu.showMainMenu();
+      } catch (InterruptedException ie) {
+        ie.printStackTrace();
+      }
     }
-
-
   }
 }
