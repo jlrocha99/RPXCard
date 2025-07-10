@@ -20,6 +20,7 @@ public class Client {
     this.birthDate = LocalDate.parse(birthDate);
   }
 
+
   //Getters and Setters
   public Integer getId() {
     return id;

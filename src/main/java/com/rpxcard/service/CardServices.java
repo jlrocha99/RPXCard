@@ -42,49 +42,36 @@ public class CardServices {
     cardNumber = cardNumberValidation(input);
     System.out.println("cardNumber: " + cardNumber);
 
+    String birthDate = null;
+    String name;
+
+    //findClientFile(bir, name);
+
     return null;
 
   }
 
   //Método que localiza um client específico
-  public static File findClientFile(Scanner birthDate, Scanner name) {
+  public static String findClientFile(Scanner birthDate, Scanner name) {
+    Scanner input = new Scanner(System.in);
     String birthDateClient;
     String clientName;
-    Pattern BIRTH_DATE_PATTERN = Pattern.compile("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(\\d{4})$");
-    Pattern NAME_PATTERN = Pattern.compile("^[a-zA-Z\\p{L}'\\\\s]+ [a-zA-Z\\p{L}'\\\\s]+$");
+    /*
+    ClientServices validation = new ClientServices();
+    birthDateClient = ClientServices.nameClientValidation(birthDate);
+    System.out.println(birthDateClient);
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-    while (true) {
-      System.out.print("Digite a data de aniversário do cliente: ");
-      birthDateClient = birthDate.nextLine();
-      //Validar o formato da data
-      if (!BIRTH_DATE_PATTERN.matcher(birthDateClient).matches()) {
-        System.out.println("Formato de data Inválido!");
-        continue;
-      }
-      //Validar o nome
-      System.out.print("Digite o nome do client: ");
-      clientName = name.nextLine();
-      if (clientName == null && !NAME_PATTERN.matcher(clientName).matches()) {
-        System.out.println("Nome inválido");
-        continue;
-      }
+     */
 
-      //formata e valida a data
-      try {
-        LocalDate data = LocalDate.parse(birthDateClient, formatter);
-        //Ex: 1999-12-22
+    //System.out.println(birthDateClient);
+    
 
-      } catch (DateTimeParseException dtpe) {
-        System.out.println("Data inexistente no calendário!");
-      }
-    }
 
     //Nota: Preciso pensar se eu continuo fazendo essa validação ou se
     //de alguma forma eu reutilizo as validações do ClientServices para a
     //criação do meu Card.
 
-
+    return null;
 
   }
   //Serviço de validação dos inputs dos cartões
@@ -134,7 +121,7 @@ public class CardServices {
   }
 
   public static Double totalLimitCardValidation(Scanner input) {
-
+    return null;
   }
 }
 
