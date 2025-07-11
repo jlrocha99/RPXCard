@@ -1,6 +1,7 @@
 package main.java.com.rpxcard.model;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class Client {
   private Integer id;
@@ -12,12 +13,13 @@ public class Client {
   //Constructors
   public Client() {
   }
-  public Client(Integer id, String name, String cpf, String email, String birthDate) {
-    this.id = id;
+  public Client(String id, String name, String cpf, String email, String birthDate) {
+    this.id = Integer.parseInt(id);
     this.name = name;
     this.cpf = cpf;
     this.email = email;
-    this.birthDate = LocalDate.parse(birthDate);
+    this.birthDate = LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    //conversões de tipo na instanciação por conta da validação com Regex.
   }
 
 

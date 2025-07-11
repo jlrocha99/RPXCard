@@ -29,7 +29,6 @@ public class inputValidator {
 
   public static boolean isValidBirthDate(String date) {
     Pattern BIRTH_DATE_PATTERN = Pattern.compile("^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/(\\d{4})$");
-
     if (!BIRTH_DATE_PATTERN.matcher(date).matches()) {
       return false;
     }

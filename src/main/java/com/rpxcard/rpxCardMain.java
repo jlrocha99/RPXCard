@@ -5,6 +5,7 @@ import main.java.com.rpxcard.model.Client;
 import main.java.com.rpxcard.service.CardServices;
 import main.java.com.rpxcard.service.PrintMenu;
 import main.java.com.rpxcard.service.ClientServices;
+import main.java.com.rpxcard.util.FileUtils;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -20,20 +21,20 @@ public class rpxCardMain {
 
     System.out.println("Numero digitado: " + choice);
 
-    ArrayList<Client> clients = new ArrayList<>();
+    Client client;
     while (choice != 8) {
       switch (choice) {
         case 1:
           ClientServices clientServices = new ClientServices();
           clientServices.menuRegisterClients();
-          clients = clientServices.registerClients();
-          clientServices.createClientFileData(clients); //criar arquivo e guardar dados do client
+          clientServices.registerClients();
+          //criar arquivo e guardar dados do client
           break;
 
         case 2:
           CardServices cardServices = new CardServices();
           cardServices.menuRegisterCards();
-          ArrayList<Card> cards = cardServices.registerCards(clients);
+          //Card cards = cardServices.registerCards(client);
           break;
 
         case 3:
