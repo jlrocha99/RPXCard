@@ -1,5 +1,5 @@
-1 - 450
-2 - João Lucas
-3 - 12345678902
-4 - jl@gmail.com
-5 - 1999-12-22
+ID: 450
+Nome: João Lucas
+CPF: 12345678902
+Email: jl@gmail.com
+Data de Nascimento: 1999-12-22

@@ -1,5 +1,5 @@
-1 - 203040
-2 - James Stuart
-3 - 12309809872
-4 - james@gmail.com
-5 - 1997-03-12
+ID: 203040
+Nome: James Stuart
+CPF: 12309809872
+Email: james@gmail.com
+Data de Nascimento: 1997-03-12

@@ -1,0 +1,7 @@
+Id do cartão: 6956
+Número do cartão: 6544775119007545
+limite Total: 1000.0
+Limite Disponível: 1000.0
+Status: ATIVO
+Hora da Criação: 21:44:08
+Cliente: jorge Clean

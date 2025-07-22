@@ -1,0 +1,7 @@
+Id do cartão: 2276
+Número do cartão: 1541781261447007
+limite Total: 1000.0
+Limite Disponível: 1000.0
+Status: ATIVO
+Hora da Criação: 21:18:31
+Cliente: Scott Summers

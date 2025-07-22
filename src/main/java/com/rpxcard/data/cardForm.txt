@@ -1,5 +1,5 @@
-1 - Card Id
-2 - Card Numero
+1 - Data de nascimento do Cliente
+2 - Nome do cliente
 3 - Card TotalLimit
-4 - Card Limite disponível
+4 - Card Limit disponível
 5 - Card Status

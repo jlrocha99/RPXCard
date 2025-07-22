@@ -3,7 +3,6 @@ package main.java.com.rpxcard.util;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 import java.util.regex.Pattern;
 
 //Método de validação dos inputs refatorado

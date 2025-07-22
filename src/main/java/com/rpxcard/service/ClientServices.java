@@ -76,10 +76,7 @@ public class ClientServices {
     FileUtils fileUtils = new FileUtils();
 
     Client client = new Client(idClient, nameClient, cpfClient, emailClient, birthDateClient);
-    fileUtils.SaveClientDataFile(client);
+    fileUtils.SaveClientDataFile(client); //Cria e salva os dados do cliente em .txt
   }
-
-
-
 }
 

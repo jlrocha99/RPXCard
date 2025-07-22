@@ -1,0 +1,7 @@
+Id do cartão: 3866
+Número do cartão: 5760059497353305
+limite Total: 1000.0
+Limite Disponível: 1000.0
+Status: ATIVO
+Hora da Criação: 21:39:15
+Cliente: James Stuart

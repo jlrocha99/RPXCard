@@ -1,0 +1,7 @@
+Id do cartão: 7968
+Número do cartão: 7317422504108982
+limite Total: 1000.0
+Limite Disponível: 1000.0
+Status: ATIVO
+Hora da Criação: 21:47:05
+Cliente: João Lucas

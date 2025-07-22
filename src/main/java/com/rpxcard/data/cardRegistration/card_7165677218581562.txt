@@ -1,0 +1,7 @@
+Id do cartão: 4627
+Número do cartão: 7165677218581562
+limite Total: 1000.0
+Limite Disponível: 1000.0
+Status: ATIVO
+Hora da Criação: 21:33:15
+Cliente: Alice blank

@@ -1,0 +1,7 @@
+Id do cartão: 1515
+Número do cartão: 7591000788490265
+limite Total: 1000.0
+Limite Disponível: 1000.0
+Status: ATIVO
+Hora da Criação: 21:52:19
+Cliente: Arthus Martin

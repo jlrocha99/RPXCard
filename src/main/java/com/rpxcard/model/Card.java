@@ -1,28 +1,30 @@
 package main.java.com.rpxcard.model;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 public class Card {
   private Integer id;
-  private Integer cardNumber;
+  private StringBuilder cardNumber;
   private Double totalLimit;
   private Double availableLimit;
   private String status;
-  private LocalDateTime cardCreationDate;
+  private LocalTime cardCreationDate;
   private Client client;  //elo de ligação entre Client e Card
 
-  public Card(Integer id, Integer cardNumber, Double totalLimit, Double availableLimit, String status, LocalDate cardCreationDate, Client client) {
+  public Card() {
+  }
+  public Card(Integer id, StringBuilder cardNumber, Double totalLimit, Double availableLimit, String status, String cardCreationDate, Client client) {
     this.id = id;
     this.cardNumber = cardNumber;
     this.totalLimit = totalLimit;
     this.availableLimit = availableLimit;
     this.status = status;
-    this.cardCreationDate = cardCreationDate.atStartOfDay();
+    this.cardCreationDate = LocalTime.parse(cardCreationDate);
     this.client = client;
   }
 
-  public Integer getId() {
+  public long getId() {
     return id;
   }
 
@@ -30,11 +32,11 @@ public class Card {
     this.id = id;
   }
 
-  public Integer getCardNumber() {
+  public StringBuilder getCardNumber() {
     return cardNumber;
   }
 
-  public void setCardNumber(Integer cardNumber) {
+  public void setCardNumber(StringBuilder cardNumber) {
     this.cardNumber = cardNumber;
   }
 
@@ -62,12 +64,14 @@ public class Card {
     this.status = status;
   }
 
-  public LocalDateTime getCardCreationDate() {
+  public LocalTime getCardCreationDate() {
     return cardCreationDate;
   }
 
-  public void setCardCreationDate(LocalDateTime cardCreationDate) {
-    this.cardCreationDate = cardCreationDate;
+  public void setCardCreationDate(LocalTime cardCreationDate) {
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+    String formated = cardCreationDate.format(formatter);
+    this.cardCreationDate = LocalTime.parse(formated);
   }
 
   public Client getClient() {
@@ -76,6 +80,16 @@ public class Card {
 
   public void setClient(Client client) {
     this.client = client;
+  }
+
+  public String toString() {
+    return ("\nid do cartão: " + id + "\n"
+        + "Número do cartão: " + cardNumber.toString() + "\n"
+        + "Limite do cartão: " + totalLimit + "\n"
+        + "Limite Disponível: " + availableLimit + "\n"
+        + "Status: " + status + "\n"
+        + "Data de criação do cartão: " + cardCreationDate + "\n"
+        + "Cliente vinculado: " + client.getName() + "\n");
   }
 }
 

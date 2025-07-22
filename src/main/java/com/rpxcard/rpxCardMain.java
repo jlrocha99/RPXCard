@@ -5,9 +5,7 @@ import main.java.com.rpxcard.model.Client;
 import main.java.com.rpxcard.service.CardServices;
 import main.java.com.rpxcard.service.PrintMenu;
 import main.java.com.rpxcard.service.ClientServices;
-import main.java.com.rpxcard.util.FileUtils;
 
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.Scanner;
 
@@ -28,13 +26,13 @@ public class rpxCardMain {
           ClientServices clientServices = new ClientServices();
           clientServices.menuRegisterClients();
           clientServices.registerClients();
-          //criar arquivo e guardar dados do client
+          //Finalizado!
           break;
 
         case 2:
           CardServices cardServices = new CardServices();
           cardServices.menuRegisterCards();
-          //Card cards = cardServices.registerCards(client);
+          cardServices.registerCards();
           break;
 
         case 3:
